@@ -5,15 +5,17 @@ import idl from './program/transfer_hook_whale.json';
 import { TOKEN_2022_PROGRAM_ID, ASSOCIATED_TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import "dotenv/config";
 
-const kpFile = "./accounts/<your key file>.json";
-const mint = new anchor.web3.PublicKey("<mint public key>")
+// const kpFile = "./accounts/<your key file>.json";
+const kpFile = "/home/wudi/.config/solana/id.json";
+const mint = new anchor.web3.PublicKey("6cLo5dY3Ts6PxX7C6rHrFhDMAjDEBFAh6NHQ2jGGPPGr")
 
 const main = async () => {
+    let solanarpc = "https://methodical-cosmological-isle.solana-devnet.quiknode.pro/bbc0e81212733d3c69aea27949b6094bce30dee4";
 
-    if (!process.env.SOLANA_RPC) {
-        console.log("Missing required env variables");
-        return;
-    }
+    // if (!process.env.SOLANA_RPC) {
+    //     console.log("Missing required env variables");
+    //     return;
+    // }
 
     console.log("💰 Reading wallet...");
     const keyFile = await readFile(kpFile);
@@ -21,10 +23,12 @@ const main = async () => {
     const wallet = new anchor.Wallet(keypair);
 
     console.log("☕️ Setting provider and program...");
-    const connection = new anchor.web3.Connection(process.env.SOLANA_RPC);
+    const connection = new anchor.web3.Connection(solanarpc);
     const provider = new anchor.AnchorProvider(connection, wallet, {});
     anchor.setProvider(provider);
     const program = new anchor.Program<TransferHookWhale>(idl as TransferHookWhale, provider);
+
+    console.log(program.programId);
 
     console.log("🪝 Initializing transfer hook accounts");
     const [extraAccountMetaListPDA] = anchor.web3.PublicKey.findProgramAddressSync(

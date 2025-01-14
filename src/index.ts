@@ -5,13 +5,15 @@ import { TransferHookWhale } from "./program/transfer_hook_whale";
 import idl from './program/transfer_hook_whale.json';
 import { readFile } from "fs/promises";
 
-const kpFile = "./accounts/<your key file>.json";
+const kpFile = "/home/wudi/.config/solana/id.json";
 
 (async () => {
-    if (!process.env.SOLANA_RPC) {
-        console.log("Missing required env variables");
-        return;
-    }
+    let solanarpc = "https://methodical-cosmological-isle.solana-devnet.quiknode.pro/bbc0e81212733d3c69aea27949b6094bce30dee4";
+
+    // if (!solanarpc) {
+    //     console.log("Missing required env variables");
+    //     return;
+    // }
 
     console.log("💰 Reading wallet...");
     const keyFile = await readFile(kpFile);
@@ -19,7 +21,7 @@ const kpFile = "./accounts/<your key file>.json";
     const wallet = new anchor.Wallet(keypair);
 
     console.log("☕️ Setting provider and program...");
-    const connection = new anchor.web3.Connection(process.env.SOLANA_RPC);
+    const connection = new anchor.web3.Connection(solanarpc);
     const provider = new anchor.AnchorProvider(connection, wallet, {});
     anchor.setProvider(provider);
 
