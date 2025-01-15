@@ -1,0 +1,159 @@
+{
+  "address": "C5wGVxugHPB9VBZKZdSnPYXoVkxgfN1YnYtqF5V8Ljsu",
+  "metadata": {
+    "name": "transfer_hook_whale",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "initialize_extra_account",
+      "discriminator": [
+        162,
+        145,
+        153,
+        36,
+        75,
+        70,
+        32,
+        175
+      ],
+      "accounts": [
+        {
+          "name": "payer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "extra_account_meta_list",
+          "writable": true
+        },
+        {
+          "name": "mint"
+        },
+        {
+          "name": "latest_whale_account",
+          "writable": true
+        },
+        {
+          "name": "token_program"
+        },
+        {
+          "name": "associated_token_program"
+        },
+        {
+          "name": "system_program"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "transfer_hook",
+      "discriminator": [
+        220,
+        57,
+        220,
+        152,
+        126,
+        125,
+        97,
+        168
+      ],
+      "accounts": [
+        {
+          "name": "source_token"
+        },
+        {
+          "name": "mint"
+        },
+        {
+          "name": "destination_token"
+        },
+        {
+          "name": "owner",
+          "docs": [
+            "can be SystemAccount or PDA owned by another program"
+          ]
+        },
+        {
+          "name": "extra_account_meta_list"
+        },
+        {
+          "name": "latest_whale_account",
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "WhaleAccount",
+      "discriminator": [
+        178,
+        158,
+        102,
+        119,
+        72,
+        153,
+        76,
+        113
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name": "WhaleTransferEvent",
+      "discriminator": [
+        159,
+        157,
+        228,
+        124,
+        143,
+        75,
+        115,
+        4
+      ]
+    }
+  ],
+  "types": [
+    {
+      "name": "WhaleAccount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "whale_address",
+            "type": "pubkey"
+          },
+          {
+            "name": "transfer_amount",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "WhaleTransferEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "whale_address",
+            "type": "pubkey"
+          },
+          {
+            "name": "transfer_amount",
+            "type": "u64"
+          }
+        ]
+      }
+    }
+  ]
+}

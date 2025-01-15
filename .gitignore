@@ -1,5 +1,6 @@
 .env
 .vscode
 .yarn
-src/program
+!src/program
 accounts
+node_modules/
